@@ -197,6 +197,7 @@ class BwTreeBase {
   // This is the mask we used for address alignment (AND with this)
   static constexpr size_t CACHE_LINE_MASK = ~(CACHE_LINE_SIZE - 1);
   
+  public:
   // We invoke the GC procedure after this has been reached
   static constexpr size_t GC_NODE_COUNT_THREADHOLD = 1024;
   
@@ -232,6 +233,7 @@ class BwTreeBase {
     {}
   };
   
+  private:
   /*
    * class GCMetaData - Metadata for performing GC on per-thread basis
    */
@@ -305,13 +307,14 @@ class BwTreeBase {
                 "class PaddedGCMetadata size does"
                 " not conform to the alignment!");
  
- private: 
+ public:
   // This is used as the garbage collection ID, and is maintained in a per
   // thread level
   // This is initialized to -1 in order to distinguish between registered 
   // threads and unregistered threads
   static thread_local int gc_id;
   
+  private:
   // This is used to count the number of threads participating GC process
   // We use this number to initialize GC data structure
   static std::atomic<size_t> total_thread_num;
